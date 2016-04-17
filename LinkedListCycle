@@ -1,0 +1,52 @@
+/*
+Given a linked list, determine if it has a cycle in it.
+
+Follow up:
+Can you solve it without using extra space?
+
+Subscribe to see which companies asked this question
+*/
+
+/*Note
+// "fast != null && fast.next != null" uses "&&" instead of "||" to make sure "fast = fast.next.next" has no NullPointerException error popping out
+// no head.next == null condition because in such case it might be cycle as well. e.g. [1], tail connects to the node index 0
+*/
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        if (head == null) { // no head.next == null condition because in such case it might be cycle as well. e.g. [1], tail connects to the // node index 0
+            return false;
+        }
+        ListNode fast = head;
+        ListNode slow = head;
+        ListNode start = null; //null if no cycle found
+        //Floyd's cycle finder
+        while (fast != null && fast.next != null) { // "fast != null && fast.next != null" uses "&&" instead of "||" to make sure "fast = // //fast.next.next" has no NullPointerException error popping out
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast && slow != null) { // if cycle found, then find the cycle start node
+                start = head;
+                while (slow != start) {
+                    slow = slow.next;
+                    start = start.next;
+                }
+                break;
+            }
+        }
+        if (start != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
