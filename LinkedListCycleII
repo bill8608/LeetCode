@@ -12,6 +12,7 @@ Subscribe to see which companies asked this question
 /*Note
 The Floyd's cycle finder loop break condition is while (fast != null && fast.next != null);
 Set the start to null at the very beginning in case no cycle found, return start as null;
+No head.next == null condition in the         if (head == null) {return null;}      if statement becasue if "[1] tail connects to the node index 0" will return null instead of [1] as expected
 */
 
 /**
@@ -27,7 +28,7 @@ Set the start to null at the very beginning in case no cycle found, return start
  */
 public class Solution {
     public ListNode detectCycle(ListNode head) {
-        if (head == null || head.next == null) {
+        if (head == null) {
             return null;
         }
         ListNode fast = head;
