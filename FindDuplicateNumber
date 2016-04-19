@@ -22,7 +22,10 @@ while (start < end) {
   else (0< >=mid) end = mid;
 }
 */
+
 public class Solution {
+    //Method 1: Binary Search
+    /*
     public int findDuplicate(int[] nums) {
         int len = nums.length;
         int start = 0;
@@ -46,5 +49,27 @@ public class Solution {
             }
         }
         return count;
+    }
+    */
+    
+    //Method 2: Floyd's cycle
+    public int findDuplicate (int[] nums) {
+        int len = nums.length;
+        int fast = 0;
+        int slow = 0;
+        int start = 0;
+        while (fast < len && nums[fast] < len) {
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+            if (fast == slow) {
+                start = 0;
+                while (slow != start) {
+                    slow = nums[slow];
+                    start = nums[start];
+                }
+                break;
+            }
+        }
+        return start;
     }
 }
