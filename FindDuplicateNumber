@@ -21,6 +21,10 @@ while (start < end) {
   if (the target is in the second half (>mid)) start = mid + 1;
   else (0< >=mid) end = mid;
 }
+
+The method 2 is Floyd's cycle finder and in the end reset to beginning to find cycle start point
+The LeetCode Linked List Cycle II is linked https://leetcode.com/discuss/70708/java-time-space-solution-by-using-assume-there-are-no-cycles
+The proving procedure is linkd: http://learningarsenal.info/index.php/2015/08/24/detecting-start-of-a-loop-in-singly-linked-list/
 */
 
 public class Solution {
