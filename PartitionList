@@ -1,0 +1,52 @@
+/*
+Given a linked list and a value x, partition it such that all nodes less than x come before nodes greater than or equal to x.
+
+You should preserve the original relative order of the nodes in each of the two partitions.
+
+For example,
+Given 1->4->3->2->5->2 and x = 3,
+return 1->2->2->4->3->5.
+*/
+
+/* Note
+This solution is very smart using two Linked Lists to collect the node with val less than x and another with val greater than or equal to x
+Do not forget to assign null to the end of large Linked List.
+Also use a dummy head and assign nodes after it. In the end, use dummy head 's next to connect two Linked Lists adn return to the function.
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode partition(ListNode head, int x) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        // Find the end node first and if the val is greater than or equal to x, 
+        // connect to the end node and if the val is less than x,
+        // keep it as it is.
+        ListNode small = new ListNode (-1);
+        ListNode smallHead = small;
+        ListNode large = new ListNode (-1);
+        ListNode largeHead = large;
+        while (head != null) {
+            if (head.val < x) {
+                small.next = head;
+                small = small.next;
+            } else {
+                large.next = head;
+                large = large.next;
+            }
+            head = head.next;
+        }
+        //Assign null to the large Linked List end node
+        large.next = null;
+        small.next = largeHead.next;
+        
+        return smallHead.next;
+    }
+}
