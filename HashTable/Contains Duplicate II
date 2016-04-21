@@ -1,0 +1,25 @@
+/*
+Given an array of integers and an integer k, find out whether there are two distinct indices i and j in the array
+such that nums[i] = nums[j] and the difference between i and j is at most k.
+*/
+
+/*Note
+Use Hash Map and store what has been checked (if statement).
+Then check map.containsKey(nums[i]) and if so check i-map.get(nums[i])<=k, if so return true.
+Do not forget to add map.put(nums[i],i).
+*/
+public class Solution {
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        if (nums == null && nums.length <= 1) {
+            return false;
+        }
+        HashMap <Integer, Integer> map = new HashMap <>();
+        for (int i=0; i<nums.length; i++) {
+            if (map.containsKey(nums[i]) && i - map.get(nums[i])<=k) {
+                return true;
+            }
+            map.put(nums[i],i);
+        }
+        return false;
+    }
+}
