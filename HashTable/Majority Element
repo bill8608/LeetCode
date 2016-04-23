@@ -2,6 +2,10 @@ Given an array of size n, find the majority element. The majority element is the
 
 You may assume that the array is non-empty and the majority element always exist in the array.
 
+/* Note
+There is a bug in the question spec on if there will two majority elements such as [0, 0, 1, 1] in which both 0 and 1 are majority
+Elements but it will return 0 only cause 0 reach the majority first.
+*/
 public class Solution {
     public int majorityElement(int[] nums) {
         HashMap <Integer,Integer> map = new HashMap<>();
