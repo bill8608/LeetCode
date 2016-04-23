@@ -6,6 +6,7 @@ Note:
 You must do this in-place without making a copy of the array.
 Minimize the total number of operations.
 
+//Solution 1: minimum operation, swap
 /* Note
 This method is very tricky and both zero and l pointers will go in the same pace
 until 0 is encountered. Then l pointer increments by 1 but zero pointer stays. So the zero 
@@ -29,6 +30,29 @@ public class Solution {
                 nums[l] = temp;
             }
             l++;
+        }
+    }
+}
+
+//Solution 2: non-swap
+/* Note
+No swap. Use count to recorder the amount of non-zero elements, e.g. x  
+and assign them to the first x elements to the first positions of the array;
+Then Assign the leftover postions with 0.
+*/
+public class Solution {
+    public void moveZeros (int[] nums) {
+        if (nums == null || nums.length <= 1) {
+            return;
+        }
+        int count;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                nums[count++] = nums[i];
+            }
+        }
+        while (count < nums.length) {
+            nums[count++] = 0;
         }
     }
 }
