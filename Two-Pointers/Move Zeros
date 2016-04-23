@@ -34,7 +34,7 @@ public class Solution {
     }
 }
 
-//Solution 2: non-swap
+//Solution 2: non-swap minimum operation
 /* Note
 No swap. Use count to recorder the amount of non-zero elements, e.g. x  
 and assign them to the first x elements to the first positions of the array;
@@ -45,14 +45,67 @@ public class Solution {
         if (nums == null || nums.length <= 1) {
             return;
         }
-        int count;
+        int count = 0;
         for (int i = 0; i < nums.length; i++) {
             if (nums[i] != 0) {
+                // Optional:Reduce the assign if use
+                //Start
+                if (i == count) { //Reduce the assign
+				    count++;
+				    continue;
+				}
+			// End
                 nums[count++] = nums[i];
             }
         }
         while (count < nums.length) {
             nums[count++] = 0;
         }
+    }
+}
+
+//Solution 3: minimum swap time, unorder!
+public class Solution {
+    public void moveZeros (int[] nums) {
+        if (nums == null || nums.length <= 1) {
+            return;
+        }
+        int start = 0, end = nums.length-1;
+        while (start <= end) {
+            if (nums[start] != 0) {
+                start++;
+            } else if (nums[end] == 0) {
+                end--;
+            } else {
+                swap (nums, start++, end--);
+            }
+        }
+    }
+    public void swap (int[] nums, int i, int j) {
+        int tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
+    }
+}
+
+//Solution 4: swap and the non-zero part has been in order
+public class Solution {
+    public void moveZeros (int[] nums) {
+        if (nums == null || nums.length <= 1) {
+            return;
+        }
+        for (int i = 0; int j = 0; j < nums.length; j++) {
+            if (nums[j] != 0) {
+                if (i < j) {
+                    swap (nums, i, j);
+                }
+                i++;
+            }
+        }
+    }
+    public void swap (int[] nums, int i, int j) {
+        int tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
     }
 }
