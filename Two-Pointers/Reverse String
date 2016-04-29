@@ -1,0 +1,59 @@
+/*
+Write a function that takes a string as input and returns the string reversed.
+
+Example:
+Given s = "hello", return "olleh".
+*/
+
+//Solution 1: Stack
+public class Solution {
+    public String reverseString(String s) {
+        if (s.length() <= 1) {
+            return s;
+        }
+        StringBuilder sb = new StringBuilder();
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < s.length(); i++) {
+            stack.push(s.charAt(i));
+        }
+        for (int i = 0; i < s.length(); i++) {
+            sb.append(stack.pop());
+        }
+        return sb.toString();
+    }
+}
+
+//Solution 2: Two pointer
+public class Solution {
+    public String reverseString(String s) {
+        if (s.length() <= 1) {
+            return s;
+        }
+        char [] sCharArr = s.toCharArray();
+        int low = 0;
+        int high = sCharArr.length-1;
+        while (low < high) {
+            char temp = sCharArr[low];
+            sCharArr[low] = sCharArr[high];
+            sCharArr[high] = temp;
+            low++;
+            high--;
+        }
+        //return new String(sCharArr); //Either is OK.
+        return String.valueOf(sCharArr);
+    }
+}
+
+//Solution 3: Use StringBuilder sb to reversely copy the original String s
+public class Solution {
+    public String reverseString (String s) {
+        if (s.length() <= 1) {
+            return s;
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = s.length() - 1; i > -1; i--) {
+            sb.append(s.charAt(i));
+        }
+        return sb.toString();
+    }
+}
