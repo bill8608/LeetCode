@@ -1,0 +1,75 @@
+/*
+Given an array of non-negative integers, you are initially positioned at the first index of the array.
+
+Each element in the array represents your maximum jump length at that position.
+
+Determine if you are able to reach the last index.
+
+For example:
+A = [2,3,1,1,4], return true.
+
+A = [3,2,1,0,4], return false.
+*/
+
+// Soltuion: Greedy from chapter 9
+public class Solution {
+    public boolean canJump(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return false;
+        }
+        int farthest = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            // Find an i in the range of farthest and the i meets nums[i]+i >= farthest
+            // replace farthesr with nums[i]+i
+            if (i <= farthest && nums[i] + i >= farthest) {
+                farthest = nums[i] + i;
+            }
+        }
+        return farthest >= nums.length -1;
+    }
+}
+
+// Solution 2
+public class Solution {
+
+    //Solution by never
+    public boolean canJump(int[] A) {
+        if (A == null || A.length == 0) {
+            return false;
+        }
+        int global = 0;
+        for (int i = 0; i <= global && i < A.length; i++) {
+            global = Math.max(A[i] + i, global);
+        }
+        return global >= A.length - 1;
+    }
+}
+
+// Solution 3
+public class Solution {
+    public boolean canJump(int[] A) {
+        int neededIndex = nums.length - 1;
+        for (int i = nums.length -1; i >= 0; --i) {
+            if (neededIndex <= nums[i] + i) {
+                neededIndex = i;
+            }
+        }
+        return neededIndex == 0;
+    }
+}
+
+//Greedy from xiaowanzi
+public class Solution {
+    public boolean canJump(int[] A) {
+        int maxCover = 0;
+        for (int start = 0; start < A.length && start <= maxCover; start++) {
+            if (A[start] + start > maxCover) {
+                maxCover = A[start] + start;
+            }
+            if (maxCover >= A.length - 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
