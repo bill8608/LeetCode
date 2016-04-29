@@ -1,0 +1,151 @@
+/*
+Write a function that takes a string as input and reverse only the vowels of a string.
+
+Example 1:
+Given s = "hello", return "holle".
+
+Example 2:
+Given s = "leetcode", return "leotcede".
+*/
+//Solution 1: 
+// isVowel can be implemented by hashmap if number of character is more
+// Another implementation: return c == 'a' || c == 'e' || c =='i' || c =='o' || c=='u' || c == 'A' || c == 'E' || c =='I' || c =='O' || c=='U';
+// return new String(cs); 
+// return String.valueOf(cs)
+// Character.toLowerCase(c)
+
+public class Solution {
+    public String reverseVowels(String s) {
+        if (s.length() < 2) {
+            return s;
+        }
+        char [] cs = s.toCharArray();
+        int low = 0;
+        int high = cs.length-1;
+        while (low < high) {
+            if (isVowel(cs[low]) && isVowel(cs[high])) {
+                char temp = cs[low];
+                cs[low] = cs[high];
+                cs[high] = temp;
+                low++;
+                high--;
+            } else if (isVowel(cs[low])) {
+                high--;
+            } else if (isVowel(cs[high])) {
+                low++;
+            } else {
+                low++;
+                high--;
+            }
+        }
+        return new String(cs);
+    }
+    private boolean isVowel(char c) {
+        switch(c) {
+            case 'a':
+            case 'e':
+            case 'i':
+            case 'o':
+            case 'u':
+            case 'A':
+            case 'E':
+            case 'I':
+            case 'O':
+            case 'U':
+            return true;
+        }
+        return false;
+    }
+}
+
+//Solution2: Use Set
+public class Solution{
+Set<Character> vowels = new HashSet<>(Arrays.asList(
+        'a', 'e', 'i', 'o', 'u',
+        'A', 'E', 'I', 'O', 'U'));
+
+public String reverseVowels(String s) {
+    char[] charArray = s.toCharArray();
+    int l = 0, r = s.length()-1;
+    while(l<r){
+        while (!vowels.contains(charArray[l]) && l<r)
+            l++;
+        while(!vowels.contains(charArray[r]) && r>l)
+            r--;
+        char temp = charArray[r];
+        charArray[r] = charArray[l];
+        charArray[l] = temp;
+        l++;
+        r--;
+    }
+    return new String(charArray);
+}
+
+//Solution3: 2-pass solution in java
+public class Solution {
+  public String reverseVowels(String s) {
+        StringBuilder str = new StringBuilder("");
+        StringBuilder only_vowels = new StringBuilder("");
+
+        int len = s.length();
+        int ptr = 0;
+
+        for(int i=len-1;i>-1;--i)
+        {
+            if(isVowel(s.charAt(i)))
+            only_vowels.append(s.charAt(i));
+        }
+
+        for(int i=0;i<len;++i)
+        {
+            if(isVowel(s.charAt(i)))
+            str.append(only_vowels.charAt(ptr++));
+            else
+            str.append(s.charAt(i));
+        }
+        return str.toString();
+    }
+    public boolean isVowel(char c)
+    {
+        switch(c)
+        {
+            case 'a':
+            case 'e':
+            case 'i':
+            case 'o':
+            case 'u':
+            case 'A':
+            case 'E':
+            case 'I':
+            case 'O':
+            case 'U':
+            return true;
+        }
+
+        return false;
+    }
+}
+
+//solution4: using stack
+  public class Solution {
+      public static String reverseVowels1(String s) {
+            if(s.length()<=1)return s;
+            Stack<Character> stack = new Stack<>();
+            StringBuffer sb = new StringBuffer();
+            for(int i=0;i<s.length();i++){
+                char c = s.charAt(i);
+                if(c=='a'||c=='A'||c=='o'||c=='O'||c=='e'||c=='E'||c=='i'||c=='I'||c=='u'||c=='U'){
+                    stack.push(c);
+                }
+            }
+            for(int i=0;i<s.length();i++){
+                char c = s.charAt(i);
+                if(c=='a'||c=='A'||c=='o'||c=='O'||c=='e'||c=='E'||c=='i'||c=='I'||c=='u'||c=='U'){
+                    sb.append(stack.pop());
+                }else{
+                    sb.append(c);
+                }
+            }
+            return sb.toString();
+        }
+  }
