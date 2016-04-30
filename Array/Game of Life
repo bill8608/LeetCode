@@ -1,0 +1,62 @@
+/*
+According to the Wikipedia's article: "The Game of Life, also known simply as Life, is a cellular automaton devised by the British mathematician John Horton Conway in 1970."
+
+Given a board with m by n cells, each cell has an initial state live (1) or dead (0). Each cell interacts with its eight neighbors (horizontal, vertical, diagonal) using the following four rules (taken from the above Wikipedia article):
+
+Any live cell with fewer than two live neighbors dies, as if caused by under-population.
+Any live cell with two or three live neighbors lives on to the next generation.
+Any live cell with more than three live neighbors dies, as if by over-population..
+Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
+Write a function to compute the next state (after one update) of the board given its current state.
+
+Follow up: 
+Could you solve it in-place? Remember that the board needs to be updated at the same time: You cannot update some cells first and then use their updated values to update other cells.
+In this question, we represent the board using a 2D array. In principle, the board is infinite, which would cause problems when the active area encroaches the border of the array. How would you address these problems?
+*/
+
+public class Solution {
+    public void gameOfLife(int[][] board) {
+        if (board == null || board.length == 0 || board[0].length == 0) {
+            return;
+        }
+        //Createa a new board to 
+        int newHeight = board.length + 2;
+        int newLength = board[0].length + 2;
+        int [][] newBoard = new int [newHeight][newLength]; 
+        for (int ie = 0; ie < newHeight; ie++ ) {
+            for (int je = 0; je < newLength; je++) {
+                if (ie != 0 && ie != newHeight -1 && je != 0 && je != newLength - 1 ) {
+                    newBoard[ie][je] = board[ie-1][je-1];
+                } else {
+                    newBoard[ie][je] = 0;
+                }
+            }
+        }
+        
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                int total = totalOfNeighbors (newBoard, i, j);
+                if (board[i][j] == 1) {
+                    if (total < 2) {
+                        board[i][j] = 0;
+                    } else if (total >= 2 && total <= 3) {
+                        board[i][j] = 1;
+                    } else {
+                        board[i][j] = 0;
+                    }
+                } else if (board[i][j] == 0 && total == 3) {
+                    board[i][j] = 1;
+                }
+            }
+        }
+    }
+    private int totalOfNeighbors (int[][] newBoard, int i, int j) {
+            int total = 0;
+            int ie = i + 1;
+            int je = j + 1;
+            total = newBoard[ie-1][je-1] + newBoard[ie-1][je] + newBoard[ie-1][je+1] +
+                    newBoard[ie][je-1]  + newBoard[ie][je+1] +
+                    newBoard[ie+1][je-1] + newBoard[ie+1][je] + newBoard[ie+1][je+1];
+            return total;
+    }
+}
