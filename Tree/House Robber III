@@ -38,6 +38,7 @@ Maximum amount of money the thief can rob = 4 + 5 = 9.
   / \   \ 
  1   4   1
  */
+ //Solution 1: This solution is right,3 and 1, 4 are not directly-linked houses and so it comeby with the rule.
 public class Solution {
     public int rob(TreeNode root) {
         if(root == null) {
@@ -51,5 +52,26 @@ public class Solution {
             val += rob(root.right.left) + rob(root.right.right);
         }
         return Math.max(root.val + val, rob (root.left) + rob (root.right));
+    }
+}
+
+// Solution 2
+public class Solution {
+    public int rob(TreeNode root) {
+        int[] res = dfs(root);
+        return Math.max(res[0], res[1]);
+    }
+    
+    public int[] dfs(TreeNode root) {
+        if (root == null) {
+            return new int[2];
+        }
+        int[] left = dfs(root.left);
+        int[] right = dfs(root.right);
+        int[] res = new int[2];
+        
+        res[0] = Math.max(left[0], left[1]) + Math.max(right[0], right[1]);
+        res[1] = root.val + left[0] + right[0];
+        return res;
     }
 }
