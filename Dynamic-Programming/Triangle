@@ -1,0 +1,39 @@
+/*
+Given a triangle, find the minimum path sum from top to bottom. Each step you may move to adjacent numbers on the row below.
+
+For example, given the following triangle
+[
+     [2],
+    [3,4],
+   [6,5,7],
+  [4,1,8,3]
+]
+The minimum path sum from top to bottom is 11 (i.e., 2 + 3 + 5 + 1 = 11).
+
+Note:
+Bonus point if you are able to do this using only O(n) extra space, where n is the total number of rows in the triangle.
+*/
+// solution 1: Bottom- up
+public class Solution {
+    public int minimumTotal(List<List<Integer>> triangle) {
+        //int [][] triangleArray = triangle.toArray();
+        //Bottom-up
+        if(triangle == null || triangle.size() == 0) {
+            return 0;
+        }
+        //Define the state : shortPath[i][j] is the shortest distance from (i,j) to the last level
+        //Initialization
+        int n = triangle.size();
+        int [][] dp = new int[n][n];
+        for (int i = 0; i < triangle.size(); i++) {
+            dp [n-1][i] = triangle.get(n-1).get(i);
+        }
+        //Recursion to get the solution
+        for (int i = n - 2; i >= 0; i--) {
+            for (int j = 0; j <= i; j++) {
+                dp[i][j] = Math.min(dp[i+1][j], dp[i+1][j+1]) + triangle.get(i).get(j);
+            }
+        }
+        return dp[0][0];
+        }
+    }
