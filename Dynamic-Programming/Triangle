@@ -13,7 +13,7 @@ The minimum path sum from top to bottom is 11 (i.e., 2 + 3 + 5 + 1 = 11).
 Note:
 Bonus point if you are able to do this using only O(n) extra space, where n is the total number of rows in the triangle.
 */
-// solution 1: Bottom- up
+// solution 1: Bottom-up
 public class Solution {
     public int minimumTotal(List<List<Integer>> triangle) {
         //int [][] triangleArray = triangle.toArray();
@@ -37,3 +37,37 @@ public class Solution {
         return dp[0][0];
         }
     }
+
+// Solution 2: Top-down
+public class Solution {
+    public int minimumTotal(List<List<Integer>> triangle) {
+        if (triangle == null || triangle.get(0) == null) {
+            return 0;
+        }
+        int n = triangle.size();
+        if (n == 1) {
+            return triangle.get(0).get(0);
+        }
+        // minPath[i][j] is the minimum path value from (0,0) to (i,j).
+        int [][] miniPath = new int[n][n];
+        miniPath[0][0] = triangle.get(0).get(0);// Initialization the starting point
+        for (int i = 1; i < n; i++) {
+            for (int j = 0; j <= i; j++ ) {
+                miniPath[i][j] = Integer.MAX_VALUE;
+                if (j == 0) {
+                    miniPath[i][j] = Math.min(miniPath[i][j], miniPath[i - 1][j]);
+                } else if (j == i) {
+                    miniPath[i][j] = Math.min(miniPath[i][j], miniPath[i - 1][j - 1]);
+                } else {
+                    miniPath[i][j] = Math.min (miniPath[i - 1][j - 1], miniPath[i - 1][j]);
+                }
+                miniPath[i][j] += triangle.get(i).get(j);
+            }
+        }
+        int miniPathValue = miniPath[n - 1][0];
+        for (int i = 1; i < n; i++) {
+            miniPathValue = Math.min(miniPathValue, miniPath[n - 1][i]);
+        }
+        return miniPathValue;
+    }
+}
