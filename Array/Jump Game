@@ -31,22 +31,6 @@ public class Solution {
 
 // Solution 2
 public class Solution {
-
-    //Solution by never
-    public boolean canJump(int[] A) {
-        if (A == null || A.length == 0) {
-            return false;
-        }
-        int global = 0;
-        for (int i = 0; i <= global && i < A.length; i++) {
-            global = Math.max(A[i] + i, global);
-        }
-        return global >= A.length - 1;
-    }
-}
-
-// Solution 3
-public class Solution {
     public boolean canJump(int[] A) {
         int neededIndex = nums.length - 1;
         for (int i = nums.length -1; i >= 0; --i) {
@@ -58,6 +42,7 @@ public class Solution {
     }
 }
 
+// Solution 3 
 //Greedy from xiaowanzi
 public class Solution {
     public boolean canJump(int[] A) {
@@ -71,5 +56,21 @@ public class Solution {
             }
         }
         return false;
+    }
+}
+
+// Solution 4: same with Solutoin 3 actually
+public class Solution {
+
+    //Solution by never
+    public boolean canJump(int[] A) {
+        if (A == null || A.length == 0) {
+            return false;
+        }
+        int global = 0;
+        for (int i = 0; i <= global && i < A.length; i++) {
+            global = Math.max(A[i] + i, global);
+        }
+        return global >= A.length - 1;
     }
 }
