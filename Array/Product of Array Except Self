@@ -10,7 +10,38 @@ Could you solve it with constant space complexity? (Note: The output array does 
 
 Subscribe to see which companies asked this question
 */
+// Solution 1: My own. The Solution 2 improves
+public class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        //int [] res = new int [nums.length];
+        int [] product = new int [nums.length];
+        product[nums.length - 1] = 1;
+        // Compute the index i's right product 
+        for( int i = nums.length -1; i > -1 ; i--) {
+            if (i == nums.length - 1) {
+                product[i] = 1;
+            } else {
+                product[i] = nums[i+1] * product[i+1];
+            }
+                 
+        }
+        int left = 1;
+        //res[0] = product[0];
+        for ( int i = 0; i < nums.length; i++) {
+            // Compute the index i's left product 
+            if (i == 0) {
+                left = 1;
+            } else {
+                left = nums[i-1] * left;
+            }
+            product[i] = left * product[i];
+            
+        }
+        return product;
+    }
+}
 
+//Solution 2: Simplify Solution 1
 public class Solution {
     public int[] productExceptSelf(int[] nums) {
         int [] res = new int [nums.length];
