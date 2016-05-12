@@ -39,6 +39,7 @@ public class Solution {
     }
 
 // Solution 2: Top-down
+// Space Optimization is below
 public class Solution {
     public int minimumTotal(List<List<Integer>> triangle) {
         if (triangle == null || triangle.size() == 0) {
@@ -67,6 +68,40 @@ public class Solution {
         int miniPathValue = miniPath[n - 1][0];
         for (int i = 1; i < n; i++) {
             miniPathValue = Math.min(miniPathValue, miniPath[n - 1][i]);
+        }
+        return miniPathValue;
+    }
+}
+
+// Space Optimization of Solution 2: the space complexity decrease from O(n^2) to O(n) by using mod method
+public class Solution {
+    public int minimumTotal(List<List<Integer>> triangle) {
+        if (triangle == null || triangle.get(0) == null) {
+            return 0;
+        }
+        int n = triangle.size();
+        if (n == 1) {
+            return triangle.get(0).get(0);
+        }
+        // minPath[i][j] is the minimum path value from (0,0) to (i,j).
+        int [][] miniPath = new int[2][n];
+        miniPath[0][0] = triangle.get(0).get(0);// Initialization the starting point
+        for (int i = 1; i < n; i++) {
+            for (int j = 0; j <= i; j++ ) {
+                miniPath[i % 2][j] = Integer.MAX_VALUE;
+                if (j == 0) {
+                    miniPath[i % 2][j] = Math.min(miniPath[i % 2][j], miniPath[(i - 1) % 2][j]);
+                } else if (j == i) {
+                    miniPath[i % 2][j] = Math.min(miniPath[i % 2][j], miniPath[(i - 1) % 2][j - 1]);
+                } else {
+                    miniPath[i % 2][j] = Math.min (miniPath[(i - 1) % 2][j - 1], miniPath[(i - 1) % 2][j]);
+                }
+                miniPath[i % 2][j] += triangle.get(i).get(j);
+            }
+        }
+        int miniPathValue = miniPath[(n - 1) % 2][0];
+        for (int i = 1; i < n; i++) {
+            miniPathValue = Math.min(miniPathValue, miniPath[(n - 1) % 2][i]);
         }
         return miniPathValue;
     }
