@@ -14,6 +14,12 @@ Note:
 You can assume that you can always reach the last index.
 */
 //Solution 1: Greedy
+/*
+steps: the number of jumps until now
+lastCover: The largest reach after jumping at steps times from A[0]
+maxCover: The largest reach from 0 to i
+when lastCover < i showing steps times of jumps can not cover the current element i and so we need to add another jump to make it reach the current maxCover 
+*/
 public class Solution {
     public int jump (int [] nums) {
         if (nums == null || nums.length == 0) {
@@ -38,3 +44,22 @@ public class Solution {
         return steps;
     }
 }
+
+// Solution 2: DP
+public class Solution {
+	//DP 
+	//steps mean the minimum step from 0 to i
+    public int jump(int[] A) {
+        int[] steps = new int[A.length];
+        steps[0] = 0;
+        for (int i = 1; i < A.length; i++) {
+            steps[i] = Integer.MAX_VALUE;
+            for (int j = 0; j < i; j++) {
+                if (steps[i] != Integer.MAX_VALUE && A[j] + j > i) {
+                    steps[i] = steps[j] + 1;
+                    break;
+                }
+            }
+        }
+        return steps[A.length - 1];
+    }
