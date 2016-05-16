@@ -114,6 +114,7 @@ public int jump(int[] nums) {
 }
 
 // Solution 4: by adam20
+// It is the same as the Solution 1 actually
 // https://leetcode.com/discuss/30647/single-loop-simple-java-solution
 public class Solution {
 public int jump(int[] A) {
