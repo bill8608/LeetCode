@@ -45,7 +45,8 @@ public class Solution {
     }
 }
 
-// Solution 2: DP
+// Solution 2: DP 
+// Not working
 public class Solution {
 	//DP 
 	//steps mean the minimum step from 0 to i
@@ -63,3 +64,67 @@ public class Solution {
         }
         return steps[A.length - 1];
     }
+
+// Solution 3: laonawuli's solution 
+// https://leetcode.com/discuss/72370/java-solution-with-explanation
+public class Solution {
+public int jump(int[] nums) {
+    // If nums.length < 2, means that we do not
+    // need to move at all.
+    if (nums == null || nums.length < 2) {
+        return 0;
+    }
+
+    // First set up current region, which is
+    // from 0 to nums[0].
+    int l = 0;
+    int r = nums[0];
+    // Since the length of nums is greater than
+    // 1, we need at least 1 step.
+    int step = 1;
+
+    // We go through all elements in the region.
+    while (l <= r) {
+
+        // If the right of current region is greater
+        // than nums.length - 1, that means we are done.
+        if (r >= nums.length - 1) {
+            return step;
+        }
+
+        // We should know how far can we reach in current
+        // region.
+        int max = Integer.MIN_VALUE;
+        for (; l <= r; l++) {
+            max = Math.max(max, l + nums[l]);
+        }
+
+        // If we can reach far more in this round, we update
+        // the boundary of current region, and also add a step.
+        if (max > r) {
+            l = r;
+            r = max;
+            step++;
+        }
+    }
+
+    // We can not finish the job.
+    return -1;
+}
+
+// Solution 4: by adam20
+// https://leetcode.com/discuss/30647/single-loop-simple-java-solution
+public class Solution {
+public int jump(int[] A) {
+int step_count = 0;
+int last_jump_max = 0;
+int current_jump_max = 0;
+for(int i=0; i<A.length-1; i++) {
+    current_jump_max = Math.max(current_jump_max, i+A[i]);
+    if( i == last_jump_max ) {
+        step_count++;
+        last_jump_max = current_jump_max;
+    } 
+}
+return step_count;
+}
