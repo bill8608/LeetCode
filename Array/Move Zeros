@@ -1,1 +1,88 @@
+/*
+Given an array nums, write a function to move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+For example, given nums = [0, 1, 0, 3, 12], after calling your function, nums should be [1, 3, 12, 0, 0].
+Note:
+You must do this in-place without making a copy of the array.
+Minimize the total number of operations.
+*/
 
+// Solution 1: Two pointer
+public class Solution {
+    public void moveZeroes(int[] nums) {
+        if(nums.length != 1 && nums != null) {
+            int j = 0;
+            int k = 1;
+            int temp;
+            while (j<k && k<nums.length) {
+                while (nums[j]!=0 && j<nums.length-1) {
+                    j++;
+                    //if (j==nums.length-1)
+                        //break;
+                }
+                k = j;
+                while (nums[k]==0 && k<nums.length-1) k++;
+                //while (nums[j]!=0 && nums[k]==0 && j<nums.length-2 && k<nums.length-1) {
+                    //j++;
+                    //k++;
+                if (j<k) {
+                    temp = nums[j];
+                    nums[j] = nums[k];
+                    nums[k] = temp;
+                }
+                //}
+                j++;
+                k++;
+            }
+        }
+            
+    }
+}
+
+// Solution 2 if the relative oder is not required
+public class moveZeros {
+	public void moveZeros (int[] nums) {
+		if(nums == null || nums.length < 2) {
+			return;
+		}
+		int start = 0, end = nums.length - 1;
+		while (start < end) {
+			while (nums[start] != 0 && start < nums.length - 1) {
+				start++;
+			}
+			while (nums[end] == 0 && end < nums.length) {
+				end--;
+			}
+			if (start < end) {
+				int temp = nums[start];
+				nums[start] = nums[end];
+				nums[end] = temp;
+			} else {
+				break;
+			}
+			start ++;
+			end --;
+		}
+		String newLine = System.getProperty("line.separator");
+		for (int i = 0; i < nums.length; i++ ) {
+			System.out.println ("nums [ " + i + " ]: " + nums[i] + newLine);
+		}
+		System.out.println (newLine);			
+	}
+	public static void main (String [] args) {
+		moveZeros obj1 = new moveZeros ();
+		int [] a = new int [] {};
+		obj1.moveZeros (a);
+		moveZeros obj2 = new moveZeros ();
+		int [] b = new int [] {1};
+		obj2.moveZeros (b);
+		moveZeros obj3 = new moveZeros ();
+		int [] c = new int [] {0, 1};
+		obj3.moveZeros (c);
+		moveZeros obj4 = new moveZeros ();
+		int [] d = new int [] {0,1,0,3,12};
+		obj4.moveZeros (d);
+		moveZeros obj5 = new moveZeros ();
+		int [] e = new int [] {1,0};
+		obj5.moveZeros (e);
+	}	
+}
