@@ -18,7 +18,36 @@ Hide Tags Math
 Show Similar Problems
 
 */
-// Solution 1: extra space is needed
+// Solution 1
+public class Solution {
+    public boolean isPalindrome(int x) {
+        int rev = 0;
+        int num = 0;
+        int sign = (x>0)?1:-1;
+        if (x == 0)
+            return true;
+        else if (sign == -1)
+            num = x * sign;
+        else
+            num = x;
+        while (num>0) {
+            if ((long) rev * 10 > Integer.MAX_VALUE)
+                //long rev_long =  rev * 10 + num % 10;
+                //long rev_long = rev * 10 + num - int (num / 10) * 10;
+                return false;
+            else {
+                //rev = rev * 10 + num % 10;
+                rev = rev * 10 + num - (int) (num / 10) * 10;
+                num = num / 10;
+            }
+        }
+        if (rev == x)
+            return true;
+        else
+            return false;
+    }
+}
+// Solution 2: extra space is needed
 public class Solution {
     public boolean isPalindrome(int x) {
         String str = new Integer(x).toString();
