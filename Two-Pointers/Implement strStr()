@@ -9,6 +9,7 @@ Hide Tags Two Pointers String
 Show Similar Problems
 */
 
+// Solution 1: chapter 9
 public class Solution {
     public int strStr(String haystack, String needle) {
         if (haystack == null || needle == null) {
