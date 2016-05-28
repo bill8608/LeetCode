@@ -1,0 +1,32 @@
+/*
+Implement strStr().
+
+Returns the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+
+Subscribe to see which companies asked this question
+
+Hide Tags Two Pointers String
+Show Similar Problems
+*/
+
+public class Solution {
+    public int strStr(String haystack, String needle) {
+        if (haystack == null || needle == null) {
+            return -1;
+        }
+        if (needle.length() == 0) {
+            return 0;
+        }
+        for (int i = 0; i < haystack.length() - needle.length() + 1; i++) {
+            for (int j = 0; j < needle.length(); j++) {
+                if (haystack.chatAt(i + j) != needle.charAt(j)) {
+                    break;
+                }
+            }
+            if (j == needle.length()) {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
