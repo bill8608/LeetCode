@@ -22,6 +22,18 @@ Subscribe to see which companies asked this question
 Hide Tags Array Backtracking Bit Manipulation
 Show Similar Problems
 */
+/* Note: Tree data structure. Each node is the list consist of the whole 2-D list.
+Recursion is needed to implement the tree structure.
+Sample: {1, 2}
+Backtracing
+
+      {}
+      /   \  
+    {1}   {2}
+    /
+{1, 2}
+*/
+
 //Solution 1: chapter 9
 public class Solution {
     public List<List<Integer>> subsetsWithDup(int[] nums) {
