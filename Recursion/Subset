@@ -1,0 +1,41 @@
+/*
+
+*/
+
+/* Note: Tree data structure. Each node is the list consist of the whole 2-D list.
+Recursion is needed to implement the tree structure.
+Sample: {1, 2}
+Backtracing
+
+      {}
+      /   \  
+    {1}   {2}
+    /
+{1, 2}
+*/
+//Solution 1: chapter 9
+public class Solution {
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        if(nums == null || nums.length == 0) {
+            return result;
+        }
+        List<Integer> list = new ArrayList<>();
+        Arrays.sort(nums);
+        subsetsHelper(result, list, nums, 0);
+    
+        return result;
+    }
+
+    private void subsetsHelper(ArrayList<ArrayList<Integer>> result, ArrayList<Integer> list, int [] nums, int pos) {
+        result.add(new ArrayList<Integer>(list));
+    
+        for (int i = pos; i < nums.length; i++) {
+            list.add(nums[i]);
+            subsetHelper(result, list, nums, i + 1);
+            list.remove(list.size() - 1);
+        }
+    }
+}
+
+
