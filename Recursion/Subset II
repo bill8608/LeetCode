@@ -36,7 +36,7 @@ public class Solution {
         helper(res, item, nums, 0);
         return res;
     }
-    private void helper(List<List<Integer>> res, List<Integer> item, int[] nums, int pos) {
+    private void helper(ArrayList<ArrayList<Integer>> res, arrayList<Integer> item, int[] nums, int pos) {
         if (!res.contains(new ArrayList<Integer> (item))) {
             res.add(new ArrayList<Integer> (item));
         }
