@@ -36,7 +36,7 @@ Backtracing
 
 //Solution 1: chapter 9
 public class Solution {
-    public List<List<Integer>> subsetsWithDup(int[] nums) {
+    public List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
         if(nums == null || nums.length == 0) {
             return result;
@@ -48,12 +48,12 @@ public class Solution {
         return result;
     }
 
-    private void subsetsHelper(ArrayList<ArrayList<Integer>> result, ArrayList<Integer> list, int [] nums, int pos) {
+    private void subsetsHelper(List<List<Integer>> result, List<Integer> list, int [] nums, int pos) {
         result.add(new ArrayList<Integer>(list));
     
         for (int i = pos; i < nums.length; i++) {
             list.add(nums[i]);
-            subsetHelper(result, list, nums, i + 1);
+            subsetsHelper(result, list, nums, i + 1);
             list.remove(list.size() - 1);
         }
     }
