@@ -59,7 +59,7 @@ public class Solution {
     }
 }
 
-//Solution 1: from LeetCode 
+//Solution 2: Quite sililar from above. from LeetCode Discussion
 public class Solution {
     public List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> res = new ArrayList<>();
