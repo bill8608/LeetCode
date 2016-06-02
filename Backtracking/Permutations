@@ -12,6 +12,7 @@ Show Similar Problems
 */
 
 // Note: Use the backtracking format from "Subsets"
+// Recursion
 public class Solution {
     public List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> res = new ArrayList<>();
