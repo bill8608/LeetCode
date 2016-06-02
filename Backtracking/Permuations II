@@ -1,0 +1,57 @@
+/*
+Given a collection of numbers that might contain duplicates, return all possible unique permutations.
+
+For example,
+[1,1,2] have the following unique permutations:
+[1,1,2], [1,2,1], and [2,1,1].
+
+Subscribe to see which companies asked this question
+
+Hide Tags Backtracking
+Show Similar Problems
+*/
+// Soluion 1: Recursion
+// Based on Permutaions and just
+// Add Arrays.sort(nums);
+/*            if (i > 0 && nums[i] == nums[i - 1] && visited[i - 1] == false) {
+                continue;
+            }
+*/
+// "visited[i - 1] == false" means the seond "1" trying to add as the beginning of "item" ArrayList. But it repatedly appear and the first one has been added then remove (false)
+      []
+    [1]   [1]
+  [1,1]
+[1,1,2]
+public class Solution {
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> item = new ArrayList<>();
+        if(nums == null || nums.length == 0) {
+            res.add(new ArrayList(item));
+            // Alternative
+            //res.add(item);
+            return res;
+        }
+        boolean visited [] = new boolean [nums.length];
+        Arrays.sort(nums);
+        permuteHelper(res, item, nums, visited);
+        return res;
+    }
+    private void permuteHelper (List<List<Integer>> res, List<Integer> item, int[] nums, boolean[] visited) {
+        if (item.size() == nums.length) {
+            res.add(new ArrayList(item));
+            return;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (i > 0 && nums[i] == nums[i - 1] && visited[i - 1] == false) {
+                continue;
+            }
+            if (!visited[i]) {
+                visited[i] = true;
+                item.add(nums[i]);
+                permuteHelper(res, item, nums, visited);
+                item.remove(item.size() - 1);
+                visited[i] = false;
+            }
+        }
+ 
