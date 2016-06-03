@@ -18,6 +18,13 @@ Hide Tags Backtracking
 Show Similar Problems
 */
 
+// Note:
+
+            //WRONG! helper (res, item, n, k - 1, start + 1); 
+            // k and n is static but start is assigned to '1' in each call since it was assigned to '1' when calling instead of 'start'
+            //it will return [2,2], [3,2],[3,3], [4,2],[4,3],[4,4] except the right //outputs cause start == 1
+            item.remove(item.size() - 1);
+            
 public class Solution {
     public List<List<Integer>> combine(int n, int k) {
         List<List<Integer>> res = new ArrayList<>();
@@ -40,7 +47,9 @@ public class Solution {
         for (int i = start; i <= n; i++) {
             item.add(i);
             helper (res, item, n, k - 1, i + 1);
-            //WRONG! helper (res, item, n, k - 1, start + 1); it will return [2,2], [3,2], [4,2] except the right outputs cause start == 1
+            //WRONG! helper (res, item, n, k - 1, start + 1); 
+            // k and n is static but start is assigned to '1' in each call since it was assigned to '1' when calling instead of 'start'
+            //it will return [2,2], [3,2],[3,3], [4,2],[4,3],[4,4] except the right //outputs cause start == 1
             item.remove(item.size() - 1);
         }
     }
