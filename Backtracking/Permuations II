@@ -17,11 +17,14 @@ Show Similar Problems
                 continue;
             }
 */
-// "visited[i - 1] == false" means the seond "1" trying to add as the beginning of "item" ArrayList. But it repatedly appear and the first one has been added then remove (false)
+// "nums[i] == nums[i - 1] && visited[i - 1] == false" means the seond "1" trying to add to "item" ArrayList. But it repatedly appear and the first one has been added then remove (false)
       []
-    [1]   [1]
-  [1,1]
-[1,1,2]
+      ...
+    [x,...,x,1]   [x,...,x,1]
+  [x,...,x,1,1]
+[x,...,x,1,1,2]
+// "nums[i] == nums[i - 1] && visited[i - 1] == false" means the "item.remove(item.size() - 1);visited[i] = false;" has been executed.
+*/
 public class Solution {
     public List<List<Integer>> permuteUnique(int[] nums) {
         List<List<Integer>> res = new ArrayList<>();
@@ -44,6 +47,7 @@ public class Solution {
         }
         for (int i = 0; i < nums.length; i++) {
             if (i > 0 && nums[i] == nums[i - 1] && visited[i - 1] == false) {
+                // "nums[i] == nums[i - 1] && visited[i - 1] == false" means the "item.remove(item.size() - 1);visited[i] = false;" has been executed.
                 continue;
             }
             if (!visited[i]) {
@@ -54,4 +58,6 @@ public class Solution {
                 visited[i] = false;
             }
         }
+    }
+}
  
