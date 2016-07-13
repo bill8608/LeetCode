@@ -1,0 +1,51 @@
+Lowest Common Ancestor of a Binary Tree
+
+Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.
+
+According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes v and w as the lowest node in T that has both v and w as descendants (where we allow a node to be a descendant of itself).”
+
+        _______3______
+       /              \
+    ___5__          ___1__
+   /      \        /      \
+   6      _2       0       8
+         /  \
+         7   4
+For example, the lowest common ancestor (LCA) of nodes 5 and 1 is 3. Another example is LCA of nodes 5 and 4 is 5, since a node can be a descendant of itself according to the LCA definition.
+
+Subscribe to see which companies asked this question
+
+Hide Tags Tree
+Show Similar Problems
+
+If TreeNode has parent variable, use:
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    private ArrayList<TreeNode> getPath2Root(TreeNode node) {
+        ArrayList<TreeNode> list = new ArrayList<TreeNode>();
+        while(node != null) {
+            list.add(node);
+            node = node.parent;
+        }
+    }
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        ArrayList<TreeNode> list1 = getPath2Root(node1);
+        ArrayList<TreeNode> list2 = getPath2Root(node2);
+        
+        int i, j;
+        for (int list1.size() - 1, j = list2.size() - 1; i >= 0 && j >= 0; i--, j--) {
+            if (list1.get(i) != list2.get(j)) {
+                return list1.get(i).parent;
+            }
+        }
+        return list1.get(i+1);
+    }
+}
