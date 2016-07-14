@@ -45,6 +45,7 @@ Show Similar Problems
         if (res.size() <= depth) {
             res.add(0, new ArrayList<>());
         }
+        // The point is add(0, new ArrayList<>()) and res.size() - depth - 1
         res.get(res.size() - depth - 1).add(root.val);
         dfs(res, root.left, depth + 1);
         dfs(res, root.right, depth + 1);
