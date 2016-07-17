@@ -1,0 +1,41 @@
+Remove Duplicates from Sorted List 
+
+Given a sorted linked list, delete all duplicates such that each element appear only once.
+
+For example,
+Given 1->1->2, return 1->2.
+Given 1->1->2->3->3, return 1->2->3.
+
+Subscribe to see which companies asked this question
+
+Hide Tags Linked List
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+        if (head == null) {
+            return dummy.next;
+        }
+        ListNode pre = head;
+        ListNode curr = pre.next;
+        while (pre.next != null) {
+            if (pre.val == curr.val) {
+                curr = curr.next;
+                pre.next = curr;
+            } else {
+                pre = curr;
+                curr = curr.next;
+            }
+        }
+        return dummy.next;
+    }
+}
