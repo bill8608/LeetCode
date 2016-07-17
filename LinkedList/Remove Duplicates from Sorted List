@@ -18,6 +18,7 @@ Hide Tags Linked List
  *     ListNode(int x) { val = x; }
  * }
  */
+Solution 1:
 public class Solution {
     public ListNode deleteDuplicates(ListNode head) {
         ListNode dummy = new ListNode(-1);
@@ -38,4 +39,23 @@ public class Solution {
         }
         return dummy.next;
     }
+}
+
+Solution 2:
+public class Solution {
+        public ListNode deleteDuplicates(ListNode head) {
+                if (head == null) {
+                        return null;
+                }
+                ListNode curr = new ListNode (0);
+                curr = head;
+                while (curr.next != null) {
+                        if (curr.next.val == curr.val) {
+                                curr.next = curr.next.next;
+                        } else {
+                                curr = curr.next;
+                        }
+                }
+                return head;
+        }
 }
