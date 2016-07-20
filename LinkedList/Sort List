@@ -1,0 +1,76 @@
+Sort List
+
+Sort a linked list in O(n log n) time using constant space complexity.
+
+Subscribe to see which companies asked this question
+
+Hide Tags Linked List Sort
+Show Similar Problems
+
+// Not working and still need debug
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    private ListNode findMiddle(ListNode head) {
+        ListNode slow = head, fast = head.next;
+        while(fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
+    private ListNode partition(ListNode head1, ListNode head2) {
+        ListNode middle = findMiddle(head1);
+        ListNode pre1 = head1;
+        ListNode pre2 = head2;
+        
+        while (head1 != null && head2 != null) {
+            while(head1 != null && head1.val < middle.val) {
+                pre1= head1;
+                head1 = head1.next;
+            }
+            while(head2 != null && head2.val > middle.val) {
+                pre2 = head2;
+                head2 = head2.next;
+            }
+            if (head1 != null && head2 != null) {
+                ListNode post1 = head1.next;
+                ListNode post2 = head2.next;
+                
+                pre1.next = head2;
+                head2.next = post1;
+                
+                pre2.next = head1;
+                head1.next = post2;
+                
+                
+                head1 = head1.next;
+                head2 = head2.next;
+                
+            }
+        }
+        return head1;
+    }
+    public ListNode sortList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode middle = findMiddle(head);
+        ListNode index = partition(head, middle.next);
+        sortList(middle.next);
+        middle.next = null;
+        sortList(head);
+        
+        return dummy.next;
+        
+    }
+}
