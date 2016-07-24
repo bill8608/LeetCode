@@ -7,6 +7,18 @@ Subscribe to see which companies asked this question
 Hide Tags Divide and Conquer Linked List Heap
 Show Similar Problems
 
+/* Review */
+// What we need is to find the minimus in k elments
+// and poll the ninimum
+// and the second elment in which linkedlis the mininum existcan can push
+
+// To meet such needs, we can use PriorityQueue wchich can poll() the minimum/maxmum each time depending how we define comparator.
+// As well, it can push a element to replace the poll-out element.
+
+// For the time complexity, each time polling the minimum in k element costs log(k) and there will be (N-k) times polling the minimum
+// So the time complextiy is O((N-k)log(k)), that is, O(Nlog(k)) since k is an constant and N is variable.
+// For the space complexity, it is O(k) because the heap use K spcace and there is nothing else.
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {
