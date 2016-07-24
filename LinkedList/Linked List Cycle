@@ -56,14 +56,14 @@ public class Solution {
             fast = fast.next.next;
             if (slow == fast && slow != null) { // if cycle found, then find the cycle start node
                 start = head;
-                while (slow != start) {
+                while (slow != start) { 
                     slow = slow.next;
                     start = start.next;
                 }
                 break;
             }
         }
-        if (start != null) {
+        if (start != null) { // or "if (start == slow)"
             return true;
         } else {
             return false;
