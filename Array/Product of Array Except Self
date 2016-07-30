@@ -41,6 +41,37 @@ public class Solution {
         return res;
     }
 }
+// Soluiton 0: Follow up
+public class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return null;
+        }
+        int[] res = new int [nums.length];
+        //left [0] = 1;
+        //int[] right = new int [nums.length];
+        for (int i = 0; i < nums.length; i ++) {
+            if (i == 0) {
+                res [i] = 1;
+            } else {
+                res [i] = nums[i-1] * res[i-1];
+            }
+        }
+        //int [] res = new int [nums.length];
+        int right = 1;
+        for (int i = nums.length-1; i >= 0; i--) {
+            if (i == nums.length-1) {
+                right = 1;
+                res [i] = res [i] * right;
+            } else {
+                right = right * nums[i + 1];
+                res[i] = res[i] * right;
+            }
+        }
+        return res;
+    }
+}
+
 // Solution 1: My own. The Solution 2 improves
 public class Solution {
     public int[] productExceptSelf(int[] nums) {
