@@ -38,7 +38,7 @@ public class Solution {
         int row = dungeon.length;
         int col = dungeon[0].length;
         
-        // dp[i][j] is the minimum heath loss (-) from (0,0) until (i,j)
+        // dp[i][j] is the heath needed to reach bottom right corner from (i,j)
         int [][] dp = new int [row][col];
         
         // initialize the bottom right corner
