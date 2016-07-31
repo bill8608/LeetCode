@@ -35,7 +35,7 @@ public class Solution {
             }
             
             if (nums[i] + i > maxCover) {
-                maxCover = A[i] + i;
+                maxCover = nums[i] + i;
             }
         }
         if (maxCover < nums.length - 1) {
