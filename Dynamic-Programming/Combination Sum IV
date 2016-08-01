@@ -32,7 +32,7 @@ Subscribe to see which companies asked this question
 Hide Tags Dynamic Programming
 Show Similar Problems
 
-
+// solution 1:
 public class Solution {
     public int combinationSum4(int[] nums, int target) {
         Arrays.sort(nums);
@@ -41,6 +41,25 @@ public class Solution {
 	    for (int num : nums) {
 	        if (num > i)
 		    break;
+		else if (num == i)
+		    res[i] += 1;
+		else
+		    res[i] += res[i-num];
+	    }
+	}
+        return res[target];
+    }
+}
+
+// solution 2: same as solution 1 except unsorted and "continue" instead of "break"
+public class Solution {
+    public int combinationSum4(int[] nums, int target) {
+        //Arrays.sort(nums);
+        int[] res = new int[target + 1];
+        for (int i = 1; i < res.length; i++) {
+	    for (int num : nums) {
+	        if (num > i)
+		    continue;
 		else if (num == i)
 		    res[i] += 1;
 		else
