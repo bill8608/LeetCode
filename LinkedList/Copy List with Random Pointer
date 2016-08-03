@@ -17,6 +17,45 @@ Show Similar Problems
  *     RandomListNode(int x) { this.label = x; }
  * };
  */
+ 
+ // Solution 0: Breadth first search
+  public class Solution {
+    public RandomListNode copyRandomList(RandomListNode head) {
+        if (head == null) {
+            return null;
+        }
+        
+        ArrayList<RandomListNode> nodes = new ArrayList<RandomListNode>();
+        HashMap<RandomListNode, RandomListNode> map = new HashMap<RandomListNode, RandomListNode>();
+        
+        //clone nodes
+        RandomListNode copyNode = new RandomListNode(head.label);
+        map.put(head, copyNode);
+        nodes.add(head);
+        int start = 0;
+        while (start < nodes.size()) {
+            RandomListNode root = nodes.get(start++);
+            RandomListNode next = root.next;
+            if(!map.containsKey(next) && next != null) {
+                copyNode = new RandomListNode(next.label);
+                nodes.add(next);
+                map.put(next, copyNode);
+            }
+        }
+        
+        //clone edges
+        for (RandomListNode oldNode : nodes) {
+            RandomListNode newNode = map.get(oldNode);
+            RandomListNode next = oldNode.next;
+            newNode.next = map.get(oldNode.next);
+            RandomListNode random = oldNode.random;
+            newNode.random = map.get(oldNode.random);
+        }
+        
+        return map.get(head);
+    }
+ }
+ // Solution 1:
 public class Solution {
     public RandomListNode copyRandomList(RandomListNode head) {
         if (head == null) {
