@@ -9,6 +9,15 @@ Subscribe to see which companies asked this question
 Hide Tags Hash Table Linked List
 Show Similar Problems
 
+/* Thoughts
+The core is two-step processing
+1. Clone the nodes
+2. Clone the edges
+
+For 1, Create a copy of each node and map the node to the copy as well as each node's next. Here we need to use LinkedList to save the result and HashMap to save the mapping.
+For 2, Create each node's next and random's copyies from the maping of previous node's next and random. 
+
+*/
 /**
  * Definition for singly-linked list with a random pointer.
  * class RandomListNode {
