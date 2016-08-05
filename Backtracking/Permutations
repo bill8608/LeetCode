@@ -10,7 +10,36 @@ Subscribe to see which companies asked this question
 Hide Tags Backtracking
 Show Similar Problems
 */
+//solution 1: Depth First Search
+public class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        if(nums == null || nums.length == 0 ) {
+            return result;
+        }
+        
+        List<Integer> list = new ArrayList<>();
+        permutateHelper(result, list, nums);
+        return result;
+    }
+    
+    public void permutateHelper(List<List<Integer>> result, List<Integer> list, int[] nums) {
+        if(list.size() == nums.length) {
+            result.add(new ArrayList<Integer>(list));
+            return ;
+        }
+        
+        for(Integer num : nums) {
+            if(!list.contains(num)) {
+                list.add(num);
+                permutateHelper(result, list, nums);
+                list.remove(list.size() - 1);
+            }
+         }
+    }
+}
 
+//solution 2:
 // Note: Use the backtracking format from "Subsets"
 // Recursion
 public class Solution {
