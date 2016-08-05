@@ -34,7 +34,9 @@ Backtracing
 {1, 2}
 */
 
-// Solution 0:
+// Solution 0: Depth First Search
+// Depth is a specific backtracking algorithm. 
+// Start from a root then treat the nodes below as root, then going as far as possible and then backing track
 public class Solution {
     public List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
@@ -50,6 +52,7 @@ public class Solution {
     
     public void subsetsHelper(List<List<Integer>> result, List<Integer> item, int[] nums, int pos) {
         if (!result.contains(item)) {
+            // need to creat space and so unable to use "result.add(item)"
             result.add(new ArrayList<Integer>(item));
             //return ;
         }
