@@ -17,6 +17,40 @@ Subscribe to see which companies asked this question
 Hide Tags Array Backtracking
 Show Similar Problems
 */
+
+//Solution 0:
+public class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> element = new ArrayList<>();
+        if (candidates == null || candidates.length == 0) {
+            return result;
+        }
+        Arrays.sort(candidates);
+        combinationSumHelper (result, element, candidates, target, 0);
+        return result;
+    }
+    
+    private void combinationSumHelper(List<List<Integer>> result, List<Integer> element, int[] candidates, int target, int pos) {
+        if (target < 0) {
+            return;
+        }
+        if (target == 0) {
+            result.add(new ArrayList<Integer>(element));
+        }
+        
+        for (int i = pos; i < candidates.length; i++) {
+            if (candidates[i] <= target) {
+                element.add(candidates[i]);
+                combinationSumHelper (result, element, candidates, target - candidates[i], i);
+                element.remove(element.size() - 1);
+            } else {
+                break;
+            }
+        }
+    }
+}
+
 // Soluion 1: Recursion
 // take more care on i in "combinationSumHelper (res, item, candidates, target - candidates[i], i)"
 
