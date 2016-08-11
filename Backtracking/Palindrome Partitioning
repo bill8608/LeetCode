@@ -1,0 +1,52 @@
+Palindrome Patitioning
+
+Given a string s, partition s such that every substring of the partition is a palindrome.
+
+Return all possible palindrome partitioning of s.
+
+For example, given s = "aab",
+Return
+
+[
+  ["aa","b"],
+  ["a","a","b"]
+]
+Subscribe to see which companies asked this question
+
+Hide Tags Backtracking
+Show Similar Problems
+
+public class Solution {
+    public List<List<String>> partition(String s) {
+        List<List<String>> result = new ArrayList<>();
+        List<String> ans = new ArrayList<>();
+        partitionHelper(s, ans, 0, result);
+        return result;
+    }
+    
+    private boolean isPalindrome(String str) {
+        for(int begin = 0, end = str.length() - 1; begin < end; begin++, end--) {
+            if(str.charAt(begin) != str.charAt(end)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    private void partitionHelper(String s, List<String> ans, int pos, List<List<String>> results) {
+        if(pos == s.length()) {
+            results.add(new ArrayList<String>(ans));
+            return;
+        }
+        
+        String substr = "";
+        for(int i = pos; i < s.length(); i++) {
+            substr += s.charAt(i);
+            if(isPalindrome(substr)) {
+                ans.add(substr);
+                partitionHelper(s, ans, i + 1, results);
+                ans.remove(ans.size() - 1);
+            }
+        }
+    }
+}
