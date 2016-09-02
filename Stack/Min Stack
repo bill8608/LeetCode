@@ -42,3 +42,16 @@ public class MinStack {
  * int param_3 = obj.top();
  * int param_4 = obj.getMin();
  */
+ 
+ 
+ Unit Case:
+ MinStack minStack1 = new MinStack();
+ minStack1.push(-1);
+ minStack1.push(2);
+ minStack1.push(-3);
+ minStack1.top();
+ minStack1.getMin(();
+ minStack1.pop();
+ minStack1.top();
+ minStack1.getMin();
+ 
