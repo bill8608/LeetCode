@@ -1,0 +1,2 @@
+Assume only standard operation is valid (push to back, pop, peek, size, isEmpty)
+Assume all operations are valid (for example, pop() will not be called if it is empty.)
