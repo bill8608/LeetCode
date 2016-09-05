@@ -1,0 +1,52 @@
+Given an array of integers, every element appears three times except for one. Find that single one.
+
+Note:
+Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
+
+Subscribe to see which companies asked this question
+
+Hide Tags Bit Manipulation
+Show Similar Problems
+
+public class Solution {
+    public int singleNumber(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return -1;
+        }
+        int [] bits = new int [32];
+        int res = 0;
+        for (int i = 0; i < 32; i ++) {
+            for (int j = 0; j < nums.length; j ++) {
+                bits[i] += ((nums[j] >> i) & 1);  
+            }
+            bits[i] %= 3; 
+            res |= (bits[i]<<i);
+        }
+        return res;
+    }
+    /*
+    	public int singleNumber(int[] A) {
+        if (A == null || A.length == 0) {
+            return -1;
+        }
+        int result = 0;
+        int[] bits = new int[32];
+        for (int i = 0; i < 32; i++) {
+            for(int j = 0; j < A.length; j++) {
+            	//check the i th bit position is 1 or 0,
+
+            	//A[j]的二进制中，从右往左数，取第i+1位上的值
+                bits[i] += ((A[j] >> i) & 1); //把输入数字的第i位加起来。这里的1是按位与， 只有第1位才有1！
+                //and plus the previous sum of i th bit position, 
+                //if divide three and the remainder equals 0, means, has 3 or 3's  multiple bits,
+                  
+            }
+			bits[i] %= 3; //然后求它们除以3的余数。
+            //after every bit position's traversal, we use or operation to save the i th bits position's value
+            //and use left shift to stroe the value.
+            result |= (bits[i] << i);//把二进制表示的结果转化为十进制表示的结果  
+        }
+        return result;
+    }
+    */
+}
