@@ -92,6 +92,8 @@ public class wiggleMaxLength {
 }
 
 //Solution 2: O(n) time complextiy
+// find the turning point: Using a for loop with two paramters.
+
 // Take attention on "<" or "<=" on " while (i + 1 < nums.length && nums[i + 1] >= nums[i])" or "while (i + 1 < nums.length && nums[i + 1] <= nums[i]" instead of no "=".
 // We need to find all nums[i+1] <= nums[i] if nums[i] < nums[j]. If no "=", taking 5,3,3,2,4,6 for example, it will be out of a cycle b/w 3,3 and increment counter by 1
 // in 3,2, actully, it should not increment until 2,4.
