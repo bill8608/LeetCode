@@ -10,6 +10,18 @@ Show Similar Problems
 
 */
 
+//My understanding:
+/*
+It is not hard but not easy to find the thought.
+
+We only need to care about nothing except the prices[i] > prices[i-1]
+
+if we encounter prices[i] < prices[i+1] < prices[i+2] < pricies[i+3] < ... < prices[i+k]
+
+The max must be prices[i+k] - prices[i].
+
+In this solution, it will be prices[i+1] - prices[i] + prices[i+2] - prices[i+1] + prices[i+3] - pricies[i+2]  + ...+ prices[i+k] - prices[i+k-1], that is prices[i+k] - prices[i].
+*/
 // 只要前一天的卖价比后一天的卖价低就直接加上差
 public class Solution {
     public int maxProfit(int[] prices) {
