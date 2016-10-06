@@ -1,0 +1,4 @@
+Dynamic Programing:
+
+//Dynamic Programming Key: Used for Max/Min, Opertimazation, how many ways, and the like
+//Look at (Analyze) the problem from end to start and then code to implement it from start to end.

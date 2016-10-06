@@ -13,7 +13,7 @@ Hide Tags Dynamic Programming
 //Solving thought:
 //Dynamic Programming Key: Used for Max/Min, Opertimazation, how many ways, and the like
 //Look at (Analyze) the problem from end to start and then code to implement it from start to end.
-
+// For this problem, the awesome point is using dp[i] += dp[i - 1] and dp[i] += dp[i - 2]
 public class Solution {
     public int climbStairs(int n) {
         int [] dp = new int [n + 1];
