@@ -52,3 +52,25 @@ public class Solution {
         return false;
     }
 }
+
+// Divide and conquer
+public class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        return search(matrix, 0, 0, matrix.length - 1, matrix[0].length - 1, target);
+    }
+    public boolean search(int[][] matrix, int top, int left, int bottom, int right, int target) {
+        if(top>bottom || left>right) {
+            return false;
+        }
+        int midY = (bottom + top) / 2;
+        int midX = (right + left) / 2;
+        int center = matrix[midY][midX];
+        if(center < target) {
+            return search(matrix, top, midX + 1, midY, right, target) || search(matrix, midY + 1, left, bottom, right, target);
+        } else if (center > target) {
+            return search(matrix, top, left, midY - 1, right, target) || search(matrix, midY, left, bottom, midX - 1, target);
+        } else {
+            return true;
+        }
+    }
+}
