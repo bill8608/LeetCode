@@ -54,6 +54,7 @@ public class Solution {
 }
 
 // Divide and conquer
+//https://discuss.leetcode.com/topic/19643/c-divide-and-conquer-solution
 public class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
         return search(matrix, 0, 0, matrix.length - 1, matrix[0].length - 1, target);
