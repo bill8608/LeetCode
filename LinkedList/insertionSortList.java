@@ -1,7 +1,7 @@
 /*
-147. Insertion Sort List   QuestionEditorial Solution  My Submissions
-Total Accepted: 86801
-Total Submissions: 276395
+147. Insertion Sort List   Add to List QuestionEditorial Solution  My Submissions
+Total Accepted: 87264
+Total Submissions: 277410
 Difficulty: Medium
 Contributors: Admin
 Sort a linked list using insertion sort.
@@ -9,7 +9,6 @@ Sort a linked list using insertion sort.
 Hide Tags Linked List Sort
 Hide Similar Problems (M) Sort List
 */
-
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -18,7 +17,11 @@ Hide Similar Problems (M) Sort List
  *     ListNode(int x) { val = x; }
  * }
  */
+ 
  /*
+ https://discuss.leetcode.com/topic/8570/an-easy-and-clear-way-to-sort-o-1-space
+ 
+ Explanation by @Augustdoker:
  Hi, friend, you asked a good question about a detail which will confuse some readers at the first glance of this code.
 To understand why the author didn't add
 
@@ -47,31 +50,28 @@ the helper list looks like : 0->1->3->2->null
 no matter you start your insertion from head of head.next, it will be TLE, because you are intertwining this two list together by adding and deleting node at the same time, this process will never end.
 It is kind of hard to explain, you can try to modify it and print the process to see.
  */
- //https://discuss.leetcode.com/topic/8570/an-easy-and-clear-way-to-sort-o-1-space
- public class Solution {
-     public ListNode insertionSortList(ListNode head) {
-    		if( head == null ){
-    			return head;
-    		}
-    		
-    		ListNode helper = new ListNode(0); //new starter of the sorted list
-    		ListNode cur = head; //the node will be inserted
-    		ListNode pre = helper; //insert node between pre and pre.next
-    		ListNode next = null; //the next node will be inserted
-    		//not the end of input list
-    		while( cur != null ){
-    			next = cur.next;
-    			//find the right place to insert
-    			while( pre.next != null && pre.next.val < cur.val ){
-    				pre = pre.next;
-    			}
-    			//insert between pre and pre.next
-    			cur.next = pre.next;
-    			pre.next = cur;
-    			pre = helper;
-    			cur = next;
-    		}
-    		
-    		return helper.next;
-    	}
+public class Solution {
+    public ListNode insertionSortList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode pre = new ListNode(0); // new starter of the sorted list
+        ListNode helper = pre; // insert node between pre and pre.next
+        ListNode curr = head; // the node which will be inserted
+        ListNode next = null; // the next node will be inserted
+        while (curr != null) {
+            next = curr.next;
+			// find the right place to insert
+            while (helper.next != null && helper.next.val < curr.val) {
+                helper = helper.next;
+            }
+			// insert between pre and pre.next
+            curr.next = helper.next;
+            helper.next = curr;
+			
+            helper = pre; // search next inserted postion from the beginning
+            curr = next;
+        }
+        return pre.next;
+    }
 }
