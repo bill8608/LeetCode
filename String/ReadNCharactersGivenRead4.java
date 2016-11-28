@@ -62,7 +62,9 @@ public class Solution extends Reader4 {
                 while (ptr < n && buffPtr < buffCnt) {
                     buf[ptr++] = buff[buffPtr++];
                 }
-                if (buffPtr >= buffCnt) buffPtr = 0;
+                if (buffPtr >= buffCnt) {
+					buffPtr = 0;
+				}
             }
             return ptr;
     }
