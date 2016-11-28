@@ -71,4 +71,52 @@ public class Solution {
             }
         }
         return res;
+    
     }
+    // backtracking
+    // the easiest to understand
+    public class Solution {
+        public List<String> generateParenthesis(int n) {
+	        List<String> result = new ArrayList<>();
+		        String element = new String();
+			        if (n <= 0) {
+				            return result;
+					            }
+						            if (n == 1) {
+							                result.add(new String ("()"));
+									            return result;
+										            }
+											            helper(result, element, n, 0);
+												            return result;
+													        }
+														    
+														        private void helper(List<String> result, String element, int n, int pos) {
+															        // stopper condition
+																        if (!result.contains(element) && pos == n) {
+																	            result.add(new String (element));
+																		                return;
+																				        }
+																					        for (int i = pos; i < n; i++) {
+																						            if (i == 0) {
+																							                    element = new String ("(");
+																									                    element = new String (element + ")");
+																											                    pos++;
+																													                }
+																															            if (i >= 1) {
+																																                    //new String elementClone = element;
+																																		                    
+																																				                    element = new String("(" + element + ")");
+																																						                    helper(result, element, n, pos + 1);
+																																								                    element = element.substring(1, element.length() - 1);
+																																										                    
+																																												                    element = new String("()" + element);
+																																														                    helper(result, element, n, pos + 1);
+																																																                    element = element.substring(2);
+																																																		                    
+																																																				                    element = new String(element + "()");
+																																																						                    helper(result, element, n, pos + 1);
+																																																								                    element = element.substring(0, element.length() - 2);
+																																																										                }
+																																																												        }
+																																																													    }
+																																																													    }
